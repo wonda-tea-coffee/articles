@@ -18,48 +18,41 @@
 ※このプログラムはChatGPTが生成しました
 
 ```index.js
-const axios = require('axios');
+const moment = require('moment');
 
-// 取得したいURLを指定
-const url = 'https://jsonplaceholder.typicode.com/posts/1';
+// 現在の日付と時間を取得
+const now = moment();
 
-axios.get(url)
-  .then(response => {
-    // レスポンスデータをコンソールに表示
-    console.log('データを取得しました:', response.data);
-  })
-  .catch(error => {
-    // エラーメッセージをコンソールに表示
-    console.error('エラーが発生しました:', error);
-  });
+// フォーマットを指定して出力
+console.log(now.format('YYYY-MM-DD HH:mm:ss')); // 例: 2024-06-02 14:23:45
 ```
 
 プログラムを実行してみましょう。
 
 ```sh
 $ node index.js
-node:internal/modules/cjs/loader:1145
+node:internal/modules/cjs/loader:1189
   throw err;
   ^
 
-Error: Cannot find module 'axios'
+Error: Cannot find module 'moment'
 Require stack:
-- /home/***/work/tmp/index.js
-    at Module._resolveFilename (node:internal/modules/cjs/loader:1142:15)
-    at Module._load (node:internal/modules/cjs/loader:983:27)
-    at Module.require (node:internal/modules/cjs/loader:1230:19)
-    at require (node:internal/modules/helpers:179:18)
-    at Object.<anonymous> (/home/***/work/tmp/index.js:1:15)
-    at Module._compile (node:internal/modules/cjs/loader:1368:14)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1426:10)
-    at Module.load (node:internal/modules/cjs/loader:1205:32)
-    at Module._load (node:internal/modules/cjs/loader:1021:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:142:12) {
+- /home/john/ghq/github.com/john/articles/index.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1186:15)
+    at Module._load (node:internal/modules/cjs/loader:1012:27)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/home/john/ghq/github.com/john/articles/index.js:1:16)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:158:12) {
   code: 'MODULE_NOT_FOUND',
-  requireStack: [ '/home/***/work/tmp/index.js' ]
+  requireStack: [ '/home/john/ghq/github.com/john/articles/index.js' ]
 }
 
-Node.js v21.7.3
+Node.js v22.2.0
 ```
 
 エラーが出ましたね。たくさん文字が書いていますが、それぞれが何を表しているのかコメントを追加してみました。
@@ -68,35 +61,36 @@ Node.js v21.7.3
 
 ```sh
 # エラーが出た箇所
-node:internal/modules/cjs/loader:1145
+node:internal/modules/cjs/loader:1189
   throw err;
   ^
 
 # エラーメッセージ(!)
 # 最も重要な部分の一つです
-Error: Cannot find module 'axios'
+Error: Cannot find module 'moment'
 # スタックトレース
 # プログラムが実行されてからどこを辿ってエラーに帰着したか
 Require stack:
-- /home/***/work/tmp/index.js
-    at Module._resolveFilename (node:internal/modules/cjs/loader:1142:15)
-    at Module._load (node:internal/modules/cjs/loader:983:27)
-    at Module.require (node:internal/modules/cjs/loader:1230:19)
-    at require (node:internal/modules/helpers:179:18)
-    at Object.<anonymous> (/home/***/work/tmp/index.js:1:15)
-    at Module._compile (node:internal/modules/cjs/loader:1368:14)
-    at Module._extensions..js (node:internal/modules/cjs/loader:1426:10)
-    at Module.load (node:internal/modules/cjs/loader:1205:32)
-    at Module._load (node:internal/modules/cjs/loader:1021:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:142:12) {
+- /home/john/ghq/github.com/john/articles/index.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1186:15)
+    at Module._load (node:internal/modules/cjs/loader:1012:27)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at Object.<anonymous> (/home/john/ghq/github.com/john/articles/index.js:1:16)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:158:12) {
   # エラーコード
   code: 'MODULE_NOT_FOUND',
   # エラーが出たファイルに至った経路
   # 配列中の一番最初の要素が犯人
-  requireStack: [ '/home/***/work/tmp/index.js' ]
+  requireStack: [ '/home/john/ghq/github.com/john/articles/index.js' ]
 }
 
-Node.js vXX.X.X
+# Node.jsのバージョン
+Node.js v22.2.0
 ```
 
 少し解像度が上がったでしょうか？このようにエラーは多くの場合、
